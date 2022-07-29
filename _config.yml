@@ -65,9 +65,13 @@ atom_feed:
   hide: true
 
 # Build settings
-theme: minimal-mistakes-jekyll
+remote_theme: mmistakes/minimal-mistakes
 minimal_mistakes_skin: "dark"
 include: ["_pages"]
+
+plugins:
+  - jekyll-include-cache
+  - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default.
