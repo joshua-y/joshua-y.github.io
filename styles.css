@@ -321,6 +321,38 @@ section h2 {
     align-items: center;
 }
 
+.contact-content {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-direction: column;
+}
+
+.email-link {
+    margin-bottom: 2rem;
+}
+
+.email-link a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.email-link a:hover {
+    transform: translateY(-2px);
+    background: var(--secondary-color);
+}
+
+.email-link a i {
+    font-size: 1.2rem;
+}
+
 .skills {
     margin-top: 2rem;
 }
