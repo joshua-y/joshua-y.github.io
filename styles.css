@@ -1,0 +1,457 @@
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #4f46e5;
+    --text-color: #1f2937;
+    --background-color: #ffffff;
+    --card-background: #f3f4f6;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --primary-text: #1f2937;
+    --secondary-text: #4b5563;
+    --accent-color: #e5e7eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+}
+
+[data-theme="dark"] {
+    --text-color: #f3f4f6;
+    --background-color: #1f2937;
+    --card-background: #374151;
+    --primary-text: #f3f4f6;
+    --secondary-text: #d1d5db;
+    --accent-color: #4b5563;
+    --box-shadow: 0 4px 6px -1px rgb(255 255 255 / 0.1);
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Add theme-specific colors for static graph */
+[data-theme="dark"] .node {
+    fill: var(--primary-color);
+    stroke: var(--background-color);
+}
+
+/* Network Graph Background */
+.network-graph {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.node {
+    transition: transform 0.3s ease, fill 0.3s ease;
+    fill: var(--primary-color);
+    stroke: var(--background-color);
+    stroke-width: 2;
+}
+
+.node:hover {
+    transform: scale(1.2);
+    fill: var(--secondary-color);
+}
+
+.connection {
+    stroke: var(--primary-color);
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-dasharray: 4;
+    animation: dash 3s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 4;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Add theme-specific colors for network graph */
+[data-theme="dark"] .node {
+    fill: var(--primary-color);
+    stroke: var(--background-color);
+}
+
+[data-theme="dark"] .connection {
+    stroke: var(--primary-color);
+}
+
+.graph-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.graph-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 20s linear infinite;
+    stroke: var(--primary-color);
+}
+
+@keyframes draw {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Add theme-specific colors for graph */
+[data-theme="dark"] .graph-line {
+    stroke: var(--primary-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--background-color);
+    box-shadow: var(--box-shadow);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--background-color) 100%);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+    font-weight: 800;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.hero-content p {
+    margin-bottom: 2rem;
+    color: var(--secondary-text);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+    margin: 0.5rem;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn.secondary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Sections */
+section {
+    padding: 6rem 2rem;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: var(--text-color);
+}
+
+/* Experience Section */
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.experience-item {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease;
+}
+
+.experience-item:hover {
+    transform: translateY(-5px);
+}
+
+.experience-item h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.location {
+    display: block;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.experience-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.experience-item li {
+    margin-bottom: 0.75rem;
+    color: var(--secondary-text);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.experience-item li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.experience-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.experience-details li {
+    margin-bottom: 0.75rem;
+    color: var(--secondary-text);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.experience-details li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+/* About Section */
+.about-content {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+
+.skills {
+    margin-top: 2rem;
+}
+
+.skill-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.skill-category {
+    background: var(--card-background);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.skill-category h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-tags span {
+    background: var(--background-color);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.skill-tags span:hover {
+    background: var(--primary-color);
+    color: var(--text-color);
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+}
+
+/* Projects Section */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Contact Section */
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#contact-form input,
+#contact-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-icon {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--background-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .about-content {
+        flex-direction: column;
+    }
+}
