@@ -13,7 +13,7 @@ Personal portfolio website for Joshua Young, deployed directly to GitHub Pages (
 .
 ├── index.html   # Single-page layout (navbar, hero, about/skills, experience, projects, footer)
 ├── styles.css   # Theme CSS variables, layout, component styles, animations, responsive rules
-└── script.js    # Theme toggle (localStorage + prefers-color-scheme), smooth scroll, scroll reveal
+└── script.js    # Theme toggle (localStorage + prefers-color-scheme), mobile nav menu, smooth scroll, scroll reveal
 ```
 
 ## Local Development & Verification
@@ -26,7 +26,7 @@ python3 -m http.server 8000
 
 When verifying changes manually, check:
 1. Both light and dark themes (including persistence across reload via `localStorage`).
-2. Desktop and mobile (`<= 768px`) viewports.
+2. Desktop and mobile (`<= 768px`) viewports, including the mobile dropdown navigation menu.
 3. Navbar anchor navigation, smooth scrolling, and section reveal animations.
 4. No browser console errors or broken external links/icons.
 
@@ -43,9 +43,3 @@ Pushing to `main` deploys directly to GitHub Pages.
   - Projects: `.project-item` with `.project-links`
 - **Navigation sync:** Keep section `id` attributes (`#home`, `#about`, `#experience`, `#projects`) aligned with `.nav-links` `href` values in `index.html`.
 - **Personal content:** Never invent or modify personal details, resume/social URLs, job descriptions, or project details unless explicitly asked.
-
-## Known Quirks
-
-- `styles.css` references `var(--border-color)` on `.skill-tags span`, which is not currently defined in `:root` or `[data-theme="dark"]`.
-- `styles.css` contains some unused/legacy rules (e.g., `.network-graph`, `.graph-svg`, `#contact-form`, `.email-link`, and duplicate `.contact-content` / `.experience-item li` selectors). Avoid building on unused selectors, and avoid unrelated cleanup unless requested.
-- Below `768px`, `.nav-links` is hidden via `display: none` with no mobile drawer/menu.
