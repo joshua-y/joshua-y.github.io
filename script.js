@@ -102,12 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-    // Staggered scroll reveal for work experience timeline items
-    const timelineItems = document.querySelectorAll('.experience-timeline .experience-item');
+    // Staggered scroll reveal for timeline and project cards
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (timelineItems.length && !prefersReducedMotion) {
-        const timelineObserver = new IntersectionObserver((entries) => {
+    function observeStaggeredReveal(selector, revealClass) {
+        const items = document.querySelectorAll(selector);
+        if (!items.length || prefersReducedMotion) return;
+
+        const revealObserver = new IntersectionObserver((entries) => {
             let visibleIndex = 0;
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -119,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             item.style.transitionDelay = '';
                         }
                     }, { once: true });
-                    timelineObserver.unobserve(item);
+                    revealObserver.unobserve(item);
                     visibleIndex += 1;
                 }
             });
@@ -127,9 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
             threshold: 0.15
         });
 
-        timelineItems.forEach((item) => {
-            item.classList.add('timeline-reveal');
-            timelineObserver.observe(item);
+        items.forEach((item) => {
+            item.classList.add(revealClass);
+            revealObserver.observe(item);
         });
     }
+
+    observeStaggeredReveal('.experience-timeline .experience-item', 'timeline-reveal');
+    observeStaggeredReveal('.project-grid .project-item', 'project-reveal');
 });
