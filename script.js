@@ -26,6 +26,44 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     }
 
+    // Mobile navigation toggle
+    const navbar = document.querySelector('.navbar');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    function setMobileNavOpen(isOpen) {
+        if (!navLinks || !navToggle) return;
+        navLinks.classList.toggle('open', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        const icon = navToggle.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-bars', !isOpen);
+            icon.classList.toggle('fa-times', isOpen);
+        }
+    }
+
+    function closeMobileNav() {
+        setMobileNavOpen(false);
+    }
+
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            setMobileNavOpen(!navLinks.classList.contains('open'));
+        });
+
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('open') && navbar && !navbar.contains(e.target)) {
+                closeMobileNav();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+                closeMobileNav();
+            }
+        });
+    }
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -41,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 this.classList.add('active');
             }
+            closeMobileNav();
         });
     });
 
