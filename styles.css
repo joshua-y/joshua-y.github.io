@@ -591,10 +591,18 @@ section h2 {
     background: var(--background-color);
     border: 1px solid var(--border-color);
     color: var(--secondary-text);
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    padding: 0.25rem 0.65rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 9999px;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.project-tags span:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
 }
 
 .project-links {
