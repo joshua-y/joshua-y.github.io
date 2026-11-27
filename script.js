@@ -101,4 +101,35 @@ document.addEventListener('DOMContentLoaded', () => {
         section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         observer.observe(section);
     });
+
+    // Staggered scroll reveal for work experience timeline items
+    const timelineItems = document.querySelectorAll('.experience-timeline .experience-item');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (timelineItems.length && !prefersReducedMotion) {
+        const timelineObserver = new IntersectionObserver((entries) => {
+            let visibleIndex = 0;
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const item = entry.target;
+                    item.style.transitionDelay = `${visibleIndex * 80}ms`;
+                    item.classList.add('is-visible');
+                    item.addEventListener('transitionend', (e) => {
+                        if (e.propertyName === 'opacity') {
+                            item.style.transitionDelay = '';
+                        }
+                    }, { once: true });
+                    timelineObserver.unobserve(item);
+                    visibleIndex += 1;
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        timelineItems.forEach((item) => {
+            item.classList.add('timeline-reveal');
+            timelineObserver.observe(item);
+        });
+    }
 });
