@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    observeStaggeredReveal('.skill-categories .skill-category', 'skill-reveal');
     observeStaggeredReveal('.experience-timeline .experience-item', 'timeline-reveal');
     observeStaggeredReveal('.project-grid .project-item', 'project-reveal');
 });
