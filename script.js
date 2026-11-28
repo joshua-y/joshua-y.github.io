@@ -105,6 +105,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Staggered scroll reveal for timeline and project cards
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // One-time terminal typing animation for hero heading
+    const typedTextEl = document.querySelector('.typed-text');
+    const heroRevealEls = document.querySelectorAll('.hero-reveal');
+
+    if (typedTextEl && !prefersReducedMotion) {
+        const fullText = typedTextEl.textContent.trim();
+        typedTextEl.textContent = '';
+        heroRevealEls.forEach((el) => el.classList.add('hero-hidden'));
+
+        let charIndex = 0;
+
+        function typeNextChar() {
+            if (charIndex < fullText.length) {
+                const nextChar = fullText.charAt(charIndex);
+                typedTextEl.textContent += nextChar;
+                charIndex += 1;
+                const delay = nextChar === ',' ? 180 : 60;
+                window.setTimeout(typeNextChar, delay);
+            } else {
+                heroRevealEls.forEach((el, idx) => {
+                    window.setTimeout(() => {
+                        el.classList.remove('hero-hidden');
+                        el.classList.add('hero-visible');
+                    }, idx * 150);
+                });
+            }
+        }
+
+        window.setTimeout(typeNextChar, 220);
+    }
+
     function observeStaggeredReveal(selector, revealClass) {
         const items = document.querySelectorAll(selector);
         if (!items.length || prefersReducedMotion) return;
